@@ -1,6 +1,5 @@
-
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import json
 from pathlib import Path
 
@@ -12,7 +11,7 @@ ARCHIVO = Path(__file__).with_name("lugares.json")
 class Lugar(BaseModel):
     ciudad: str
     pais: str
-    presupuesto: int
+    presupuesto: int = Field(ge=100, le=10000)
     descripcion: str
 
 
@@ -22,9 +21,16 @@ def leer_lugares():
 
 
 @app.get("/lugares")
-def listar_lugares():
-    return leer_lugares()
+def listar_lugares(pais: str | None = None):
+    lugares = leer_lugares()
 
+    if pais is not None:
+        lugares = [
+            lugar for lugar in lugares
+            if lugar["pais"].lower() == pais.lower()
+        ]
+
+    return lugares
 
 @app.get("/lugares/{id}")
 def buscar_lugar(id: int):
@@ -40,8 +46,41 @@ def buscar_lugar(id: int):
     )
 
 
+
 @app.post("/lugares", status_code=201)
 def agregar_lugar(lugar: Lugar):
+    lugares = leer_lugares()
+
+    # Comprobar si la ciudad y el país ya existen
+    for destino in lugares:
+        if (
+            destino["ciudad"].strip().casefold() == lugar.ciudad.strip().casefold()
+            and destino["pais"].strip().casefold() == lugar.pais.strip().casefold()
+        ):
+            raise HTTPException(
+                status_code=409,
+                detail="Este lugar ya existe"
+            )
+
+    # Calcular automáticamente el nuevo ID
+    nuevo_id = max(
+        (destino["id"] for destino in lugares),
+        default=0
+    ) + 1
+
+    nuevo_lugar = {
+        "id": nuevo_id,
+        **lugar.model_dump()
+    }
+
+    lugares.append(nuevo_lugar)
+
+    # Guardar los cambios en el JSON
+    with open(ARCHIVO, "w", encoding="utf-8") as archivo:
+        json.dump(lugares, archivo, ensure_ascii=False, indent=4)
+
+    return nuevo_lugar
+
     lugares = leer_lugares()
 
     nuevo_id = max(
