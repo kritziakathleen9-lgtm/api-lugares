@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "ciudad": "Edimburgo",
+        "pais": "Reino Unido",
+        "presupuesto": 800,
+        "descripcion": "Visitar el Castillo de Edimburgo y recorrer la Royal Mile"
+    },
+    {
+        "id": 2,
+        "ciudad": "Tokio",
+        "pais": "Japón",
+        "presupuesto": 2000,
+        "descripcion": "Conocer sus templos y barrios tecnológicos"
+    },
+    {
+        "id": 3,
+        "ciudad": "Colonia",
+        "pais": "Alemania",
+        "presupuesto": 650,
+        "descripcion": "Visitar la Catedral de Colonia y pasear junto al río Rin"
+    },
+    {
+        "id": 4,
+        "ciudad": "Nueva York",
+        "pais": "Estados Unidos",
+        "presupuesto": 1800,
+        "descripcion": "Conocer Central Park y Times Square"
+    },
+    {
+        "id": 5,
+        "ciudad": "Seúl",
+        "pais": "Corea del Sur",
+        "presupuesto": 1500,
+        "descripcion": "Visitar palacios tradicionales y mercados"
+    }
+]
