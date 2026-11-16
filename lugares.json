@@ -3,8 +3,8 @@
         "id": 1,
         "ciudad": "Edimburgo",
         "pais": "Reino Unido",
-        "presupuesto": 800,
-        "descripcion": "Visitar el Castillo de Edimburgo y recorrer la Royal Mile"
+        "presupuesto": 1000,
+        "descripcion": "Visitar el Castillo de Edimburgo, recorrer la Royal Mile y conocer Arthur's Seat"
     },
     {
         "id": 2,
