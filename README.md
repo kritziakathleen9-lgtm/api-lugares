@@ -1,35 +1,58 @@
 # 🌍 Mi API de Lugares para Visitar
 
-## Descripción
+## 📌 Descripción
 
-Este proyecto es una API REST desarrollada con Python y FastAPI que permite gestionar un catálogo de lugares que me gustaría visitar.
+Este proyecto consiste en una API REST desarrollada con **Python y FastAPI** que permite gestionar un catálogo de lugares que me gustaría visitar alrededor del mundo.
 
-La API permite consultar, agregar, editar y eliminar destinos turísticos. La información se almacena en un archivo JSON para conservar los cambios incluso después de reiniciar el servidor.
+La API permite consultar, agregar, editar y eliminar destinos turísticos. También incluye funcionalidades adicionales como filtrar lugares por país, validar presupuestos y evitar destinos duplicados.
 
-## Tecnologías utilizadas
+Los datos se almacenan en un archivo JSON, por lo que los cambios se mantienen guardados incluso después de reiniciar el servidor.
 
-- Python 3.14
-- FastAPI
-- Pydantic
-- JSON
-- Uvicorn
+## 🛠️ Tecnologías utilizadas
 
-## Instalación y ejecución
+- **Python 3.14**
+- **FastAPI:** creación de la API REST.
+- **Pydantic:** validación de datos.
+- **JSON:** almacenamiento de los destinos.
+- **Uvicorn:** servidor de desarrollo.
+- **Swagger UI:** documentación y pruebas de las rutas.
+- **Git y GitHub:** control de versiones.
+
+## 📁 Estructura del proyecto
+
+```text
+api-lugares/
+├── main.py
+├── lugares.json
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+- `main.py`: contiene la lógica de la API y sus rutas.
+- `lugares.json`: almacena los destinos turísticos.
+- `requirements.txt`: contiene las dependencias del proyecto.
+- `README.md`: documentación del proyecto.
+- `.gitignore`: evita subir archivos innecesarios, como el entorno virtual.
+
+## 🚀 Instalación y ejecución
 
 **1. Clonar el repositorio**
 
 ```bash
-git clone URL_DEL_REPOSITORIO
+git clone https://github.com/kritziakathleen9-lgtm/api-lugares.git
 cd api-lugares
 ```
 
-**2. Crear el entorno virtual**
+**2. Crear un entorno virtual con Python 3.14**
 
 ```bash
 py -3.14 -m venv .venv
 ```
 
-**3. Activar el entorno virtual en Git Bash (Windows)**
+**3. Activar el entorno virtual**
+
+En Git Bash (Windows):
 
 ```bash
 source .venv/Scripts/activate
@@ -44,44 +67,39 @@ python -m pip install -r requirements.txt
 **5. Iniciar el servidor**
 
 ```bash
-python -m uvicorn main:app --reload
+fastapi dev main.py
 ```
 
-**6. Abrir la documentación**
+**6. Abrir la documentación interactiva**
+
+Una vez iniciado el servidor, acceder a:
 
 http://127.0.0.1:8000/docs
 
-## Rutas de la API
+Desde Swagger UI se pueden probar todas las rutas de la API.
+
+## 📍 Rutas de la API
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/lugares` | Listar todos los lugares |
-| GET | `/lugares/{id}` | Buscar un lugar por ID |
-| POST | `/lugares` | Agregar un nuevo lugar |
-| PUT | `/lugares/{id}` | Editar un lugar existente |
-| DELETE | `/lugares/{id}` | Eliminar un lugar |
+| GET | `/lugares` | Listar todos los destinos |
+| GET | `/lugares/{id}` | Buscar un destino por ID |
+| POST | `/lugares` | Agregar un nuevo destino |
+| PUT | `/lugares/{id}` | Editar un destino existente |
+| DELETE | `/lugares/{id}` | Eliminar un destino |
 
-## Ejemplo de un destino
+### Ejemplo de un destino
 
 ```json
 {
   "id": 1,
   "ciudad": "Edimburgo",
   "pais": "Reino Unido",
-  "presupuesto": 800,
-  "descripcion": "Visitar el Castillo de Edimburgo y recorrer la Royal Mile"
+  "presupuesto": 1000,
+  "descripcion": "Visitar el Castillo de Edimburgo, recorrer la Royal Mile y conocer Arthur's Seat"
 }
 ```
 
-## Funcionalidades
+Cada destino contiene:
 
-- Catálogo inicial de cinco destinos turísticos.
-- Validación de datos mediante Pydantic.
-- Generación automática de ID al agregar un lugar.
-- Respuestas 404 cuando un destino no existe.
-- Almacenamiento persistente en `lugares.json`.
-- Documentación interactiva con Swagger UI.
-
-## Autoría
-
-Proyecto individual desarrollado como práctica de FastAPI.
+- `id`: identificador único generado
